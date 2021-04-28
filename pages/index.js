@@ -27,7 +27,7 @@ export default function HomePage({ posters }) {
   );
 }
 
-export async function getStaticProps(ctx) {
+export async function getStaticProps() {
   const res = await fetch(`${API_URL}/api/posters`);
   const posters = await res.json();
 
