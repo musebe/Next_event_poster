@@ -28,7 +28,7 @@ export default function HomePage({ posters }) {
 }
 
 export async function getStaticProps() {
-  const res = await fetch(`${API_URL}/api/posters`);
+  const res = await fetch(`${API_URL}/api/posters/cloudinary`);
   const posters = await res.json();
 
   //This will log the responses on the server side

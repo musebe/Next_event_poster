@@ -9,7 +9,7 @@ export default function HomePage({ posters }) {
   return (
     <div>
       <Layout>
-        <h1>All Events</h1>
+        <h1>Upcoming Events</h1>
 
         {posters.length === 0 && <h3>No Event Posters Created</h3>}
 
@@ -21,15 +21,14 @@ export default function HomePage({ posters }) {
   );
 }
 
-export async function getStaticProps(ctx) {
-  const res = await fetch(`${API_URL}/api/posters`);
+export async function getStaticProps() {
+  const res = await fetch(`${API_URL}/api/posters/cloudinary`);
   const posters = await res.json();
 
   //This will log the responses on the server side
   // console.log(posters);
-
   return {
-    props: { posters},
+    props: { posters },
     revalidate: 1,
   };
 }
