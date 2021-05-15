@@ -1,5 +1,10 @@
 import { getAllPosters} from '../../../utils/cloudinary';
 
+
+
+
+
+
 async function handler(req, res) {
   if (req.method === 'GET') {
     try {

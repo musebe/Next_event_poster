@@ -3,17 +3,15 @@ import Link from 'next/link';
 import { BsCardImage } from 'react-icons/bs';
 import Modal from '@/components/Modal';
 import styles from '@/styles/Header.module.css';
-import ImageUpload from '@/components/ImageUpload';
+//import ImageUpload from '@/components/ImageUpload';
+import Upload from '@/components/Upload';
 
 export default function Header() {
   const [showModal, setShowModal] = useState(false);
 
   const imageUploaded = async (e) => {
-    //  const res = await fetch(`${API_URL}/events/${evt.id}`);
-    //  const data = await res.json();
-    //  setImagePreview(data.image.formats.thumbnail.url);
     console.log('uploaded');
-    //  setShowModal(false);
+    setShowModal(false);
   };
 
   return (
@@ -43,7 +41,7 @@ export default function Header() {
       </nav>
 
       <Modal show={showModal} onClose={() => setShowModal(false)}>
-        <ImageUpload imageUploaded={imageUploaded} />
+        <Upload imageUploaded={imageUploaded} />
       </Modal>
     </header>
   );

@@ -15,7 +15,7 @@ export default function HomePage({ posters }) {
         {posters.length === 0 && <h3>No Event Posters Created</h3>}
 
         {posters.map((poster) => (
-          <EventItem key={poster.id} poster={poster} />
+          <EventItem key={poster.ts} poster={poster} />
         ))}
         {posters.length > 0 && (
           <Link href='/posters'>
@@ -28,14 +28,14 @@ export default function HomePage({ posters }) {
 }
 
 export async function getStaticProps() {
-  const res = await fetch(`${API_URL}/api/posters/cloudinary`);
+  const res = await fetch(`${API_URL}/api/getTransformations`);
   const posters = await res.json();
 
   //This will log the responses on the server side
-  // console.log(posters);
+  console.log(posters);
 
   return {
-    props: { posters: posters.slice(0, 3) },
+    props: { posters: posters.slice(0, 10) },
     revalidate: 1,
   };
 }

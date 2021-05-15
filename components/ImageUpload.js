@@ -20,6 +20,22 @@ export default function ImageUploader({ defaultImage }) {
 
   function uploadFile(file) {
     const url = `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUDNAME}/upload`;
+    const transformation = [
+      // JSON.stringify({
+      //   gravity: 'face',
+      //   height: 400,
+      //   width: 400,
+      //   crop: 'crop',
+      // }),
+      // JSON.stringify({ radius: 'max' }),
+      // JSON.stringify({ width: 200, crop: 'scale' }),
+      JSON.stringify({
+        overlay: 'poster_overlay',
+        flags: 'relative',
+        height: '1.0',
+        width: '1.0',
+      }),
+    ];
     const xhr = new XMLHttpRequest();
     const fd = new FormData();
     xhr.open('POST', url, true);
@@ -34,22 +50,32 @@ export default function ImageUploader({ defaultImage }) {
     xhr.onreadystatechange = (e) => {
       if (xhr.readyState == 4 && xhr.status == 200) {
         const response = JSON.parse(xhr.responseText);
-
-        setImage(response.secure_url);
-        console.log(response.secure_url);
+        setImage(response.eager[0].secure_url);
+        console.log(response.eager[0].secure_url);
       }
     };
-
+    fd.append('file', file);
+    fd.append('api_key', process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY);
     fd.append(
       'upload_preset',
       process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET
     );
-    fd.append('tags', 'browser_upload');
-    fd.append('file', file);
+    //fd.append('tags', 'guest_speaker');
+    fd.append(
+      'eager',
+      'w_1000,c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35'
+    );
+    fd.append('public_id', 'sample_image');
+    fd.append('signature', 'b99d64148c5be8125338b5b4359769aa693b01a7');
+    fd.append('timestamp', '1620522881');
     xhr.send(fd);
   }
+  // https://www.utctime.net/eat-time-now
+  //www.liavaag.org/English/SHA-Generator
 
-  return (
+  // eager=w_1000,c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35&public_id=sample_image&timestamp=1620522881&upload_preset=event_postersR6ZNhy8CtPLrFE4CvjOsBvkQTk
+
+  https: return (
     <>
       {image ? (
         <img
