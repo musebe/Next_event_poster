@@ -1,4 +1,4 @@
-import { getAllPosters} from '../../../utils/cloudinary';
+import { getAllPosters} from '.';
 
 
 
