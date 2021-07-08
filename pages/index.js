@@ -32,7 +32,7 @@ export async function getStaticProps() {
   const posters = await res.json();
 
   //This will log the responses on the server side
-  console.log(posters);
+  // console.log(posters);
 
   return {
     props: { posters: posters.slice(0, 10) },

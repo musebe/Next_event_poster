@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { API_URL } from '@/config/index';
 import styles from '@/styles/Form.module.css';
 
 const Upload = ({ imageUploaded }) => {
@@ -40,7 +39,7 @@ const Upload = ({ imageUploaded }) => {
 
   const uploadImage = async (base64EncodedImage) => {
     try {
-      await fetch(`${API_URL}/api/posters/upload`, {
+      await fetch('/api/posters/upload', {
         method: 'POST',
         body: JSON.stringify({ data: base64EncodedImage }),
         headers: { 'Content-Type': 'application/json' },

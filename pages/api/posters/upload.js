@@ -36,7 +36,7 @@ export default async (req, res) => {
           },
           {
             overlay: {
-              text: 'Speakers Name',
+              text: 'Eugene Musebe',
               font_family: 'Arial',
               font_size: 24,
             },
@@ -50,10 +50,10 @@ export default async (req, res) => {
 
       const transformedImg = await cloudinary.url(
         'events_underlay.png',
-
         cloudinaryTransforms
       );
 
+      //take the transformed image url and save in FaunaDB
       client
         .query(
           q.Create(q.Collection('transformations'), {
@@ -66,7 +66,6 @@ export default async (req, res) => {
 
       console.log(uploadResponse, cloudinaryTransforms, transformedImg);
 
-      //take the transformed image url and save in FaunaDB
       res.json({ msg: 'yaya' });
     } catch (err) {
       console.error(err);
